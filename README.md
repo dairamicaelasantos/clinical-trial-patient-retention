@@ -25,4 +25,4 @@ In multi-site clinical trials, data migrations and manual entry often result in 
 * `/clinical_visits_and_queries_raw.csv` — Current clinical visit logs and error flags.
 * `/historical_patient_archive.csv` — Unupdated legacy archive requiring format transformation.
 * `/clinical_analysis.sql` — Multi-table SQL script handling data unioning, cleaning, and master KPI aggregation.
-* 📄 [Download Daira Santos' Resume (PDF)](./Daira%20Santos%20-%20Resume.pdf)[cite: 1]
+* 📄 [Download Daira Santos' Resume (PDF)](./Daira%20Santos%20-%20Resume.pdf)
