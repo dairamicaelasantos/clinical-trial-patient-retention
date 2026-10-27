@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="clinical_research.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1030"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="0" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="clinical_visits_and_queries_raw" custom_title="0" dock_id="2" table="4,31:mainclinical_visits_and_queries_raw"/><dock_state state="000000ff00000000fd0000000100000002000003dc000002aafc0100000001fc00000000000003dc0000010100fffffffa000000010100000002fb000000160064006f0063006b00420072006f00770073006500310000000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000010100ffffff000002f10000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="clinical_visits_and_queries_raw" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="75"/><column index="3" value="94"/><column index="4" value="112"/><column index="5" value="85"/><column index="6" value="85"/><column index="7" value="138"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">WITH 
+current_standardized AS (
+    SELECT 
+        patient_id AS Pt_ID, 
+        site_location,
+        CASE
+            WHEN LOWER(site_location) LIKE '%north%' THEN 'Site A - North'
+            WHEN LOWER(site_location) LIKE '%south%' THEN 'Site B - South'
+            WHEN LOWER(site_location) LIKE '%east%' THEN 'Site C - East'
+            ELSE 'Unknown Site'
+        END AS standardized_site, 
+        risk_category, 
+        enrollment_date AS standardized_date, 
+        'Current System' AS data_source
+    FROM patients_raw
+),
+legacy_standardized AS (
+    SELECT 
+        Pt_ID AS Pt_ID,
+        Location_Code,
+        CASE 
+            WHEN LOWER(Location_Code) LIKE '%north%' THEN 'Site A - North'
+            WHEN LOWER(Location_Code) LIKE '%south%' THEN 'Site B - South'
+            WHEN LOWER(Location_Code) LIKE '%east%' THEN 'Site C - East'
+            ELSE 'Unknown Site'
+        END AS standardized_site,
+        'Unspecified (Legacy)' AS risk_category,
+        SUBSTR(Registration_Date, 7, 4) || '-' || 
+        SUBSTR(Registration_Date, 1, 2) || '-' || 
+        SUBSTR(Registration_Date, 4, 2) AS standardized_date,
+        'Legacy Archive' AS data_source
+    FROM historical_patient_archive
+), -- 3. ADD A COMMA HERE
+
+-- 4. INSERT THIS MIDDLE STEP TO STACK YOUR TWO PATIENT TABLES TOGETHER
+unified_master_patients AS (
+    SELECT * FROM current_standardized
+    UNION ALL
+    SELECT * FROM legacy_standardized
+), -- 5. ADD A COMMA HERE
+
+cleaned_visits AS (
+    SELECT 
+        patient_id,
+        visit_status,
+        COALESCE(actual_date, '1900-01-01') AS verified_actual_date,
+        COALESCE(data_queries_count, 0) AS verified_queries_count
+    FROM clinical_visits_and_queries_raw
+) 
+SELECT 
+    m.standardized_site,
+    m.data_source,
+    COUNT(DISTINCT m.Pt_ID) AS total_patients_registered,
+    SUM(CASE WHEN v.visit_status IN ('Completed', 'Finished') THEN 1 ELSE 0 END) AS successful_outcomes,
+    SUM(v.verified_queries_count) AS total_data_queries
+FROM unified_master_patients m
+LEFT JOIN cleaned_visits v ON m.Pt_ID = v.patient_id
+GROUP BY m.standardized_site, m.data_source;</sql><current_tab id="0"/></tab_sql></sqlb_project>
