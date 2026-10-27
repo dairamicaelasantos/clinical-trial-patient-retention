@@ -1,8 +1,3 @@
--- ADVANCED MULTI-SOURCE CLINICAL RESEARCH DATA CLEANING & RECONCILIATION PIPELINE
--- Author: Daira Santos
--- Description: Reconciles current trial logs with unupdated legacy archive data, standardizing formatting variations and missing entries.
-
--- STEP 1: Standardize Current Patient Records
 WITH current_standardized AS (
     SELECT 
         patient_id AS pt_id,
@@ -17,9 +12,6 @@ WITH current_standardized AS (
         'Current System' as data_source
     FROM patients_raw
 ),
-
--- STEP 2: Standardize Legacy Archive Data (Fixing old formats & alternative naming conventions)
-legacy_standardized AS (
     SELECT 
         Pt_ID AS pt_id,
         CASE 
@@ -37,16 +29,12 @@ legacy_standardized AS (
         'Legacy Archive' as data_source
     FROM historical_patient_archive
 ),
-
--- STEP 3: Combine Current and Relevant Historical Data into a Unified Master View
-unified_master_patients AS (
+AS (
     SELECT * FROM current_standardized
     UNION ALL
     SELECT * FROM legacy_standardized
 ),
-
--- STEP 4: Standardize Visit and Query Metrics
-cleaned_visits AS (
+AS (
     SELECT 
         patient_id,
         visit_status,
@@ -54,8 +42,6 @@ cleaned_visits AS (
         COALESCE(data_queries_count, 0) AS verified_queries_count
     FROM clinical_visits_and_queries_raw
 )
-
--- STEP 5: Final Aggregate Master KPI Report across All Data Sources
 SELECT 
     m.standardized_site,
     m.data_source,
