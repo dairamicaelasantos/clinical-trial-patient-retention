@@ -1,1 +1,5 @@
-
+Pt_ID,Location_Code,Registration_Date,Participant_Status,Notes
+OLD-801,North_Branch_A,01/05/2026,Finished,Legacy record - verified by lead coordinator
+OLD-802,South_Branch_B,01/08/2026,Terminated,Dropped due to scheduling conflict
+OLD-803,North_Branch_A,01/10/2026,Finished,Completed all trial phases successfully
+OLD-804,East_Branch_C,01/14/2026,Active,Ongoing tracking required
