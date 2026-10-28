@@ -31,5 +31,5 @@ clinical-trial-patient-retention/
 │   └── clinical_analysis.sql                # Full SQL script (ETL, master & audit queries)
 │
 └── reports/                                 # Business intelligence outputs
-    ├── clinical_trial_executive_dashboard.xlsx # Formatted multi-tab executive workbook
+    ├── clinical_trial_report.csv            # Formatted multi-tab
     └── _clinical_kpi_report.csv             # Exported site-level aggregate KPIs
