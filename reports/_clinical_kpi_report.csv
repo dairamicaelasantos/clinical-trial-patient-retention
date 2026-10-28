@@ -1,1 +1,7 @@
-
+standardized_site,data_source,total_patients_registered,successful_outcomes,total_data_queries
+Site A - North,Current System,3,2,6
+Site A - North,Legacy Archive,2,0,
+Site B - South,Current System,3,3,4
+Site B - South,Legacy Archive,1,0,
+Site C - East,Current System,2,1,9
+Site C - East,Legacy Archive,1,0,
