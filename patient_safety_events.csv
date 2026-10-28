@@ -1,0 +1,12 @@
+CREATE TABLE patient_safety_events (
+    event_id TEXT,
+    patient_id TEXT,
+    ae_severity TEXT, -- 'Mild', 'Moderate', 'Severe', 'Serious'
+    action_taken TEXT
+);
+INSERT INTO patient_safety_events VALUES 
+('E01', 'P001', 'Mild', 'None'),
+('E02', 'P003', 'Severe', 'Drug Interrupted'),
+('E03', 'P005', 'Moderate', 'Dose Reduced'),
+('E04', 'P102', 'Severe', 'Hospitalization'),
+('E05', 'P105', 'Mild', 'None');
