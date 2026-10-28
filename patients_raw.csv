@@ -1,9 +1,0 @@
-patient_id,site_location,birth_date,enrollment_date,risk_category
-P-1001,Site A - North,1985-04-12,2026/01/10,High
-P-1002,site_b_south,1992-11-23,1/12/2026,Medium
-P-1003,Site A - North,1978-06-05,2026-01-15,Low
-P-1004,Site C - East,1990-09-30,2026-01-20,High
-P-1005,Site B - South,1983-12-14,2026/01/22,Medium
-P-1006,site_c_east,1995-02-18,2/1/2026,Low
-P-1007,Site A - North,1970-07-09,2026-02-03,High
-P-1008,Site B - South,1988-03-27,2026/02/05,Low
