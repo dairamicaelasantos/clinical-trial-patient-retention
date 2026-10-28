@@ -1,0 +1,6 @@
+event_id,patient_id,ae_severity,action_taken
+E01,P001,Mild,None
+E02,P003,Severe,Drug Interrupted
+E03,P005,Moderate,Dose Reduced
+E04,P102,Severe,Hospitalization
+E05,P105,Mild,None
