@@ -1,1 +1,9 @@
-
+visit_id,patient_id,visit_number,scheduled_date,actual_date,visit_status,data_queries_count
+V-501,P-1001,1,2026-01-10,2026-01-10,Completed,0
+V-502,P-1002,1,2026-01-12,2026-01-14,Completed,3
+V-503,P-1003,1,2026-01-15,2026-01-15,Completed,0
+V-504,P-1004,1,2026-01-20,,Missed,5
+V-505,P-1005,1,2026-01-22,2026-01-22,Completed,1
+V-506,P-1006,1,2026-02-01,2026-02-03,Completed,4
+V-507,P-1007,1,2026-02-03,,Missed,6
+V-508,P-1008,1,2026-02-05,2026-02-05,Completed,0
