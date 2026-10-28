@@ -1,28 +1,35 @@
-# 🏥 Clinical Trial Patient Retention & Data Governance Pipeline
+## 🏥 Clinical Trial Patient Retention & Safety Analytics Pipeline
 
-### 📌 Project Overview
-In multi-site clinical trials, data migrations and manual entry often result in legacy archives using outdated formats, alternative column names (`Pt_ID` vs `patient_id`), and different date structures (`MM/DD/YYYY`). This project demonstrates an advanced data cleaning pipeline that reconciles current operational databases with relevant unupdated historical archives.
-
----
-
-### ⚙️ Advanced Data Engineering & Reconciliation Logic
-* **Multi-Source Unioning (`UNION ALL`):** Merged current system records with legacy archive files seamlessly.
-* **Legacy Date Parsing & Transformation:** Converted string-based legacy date formats (`MM/DD/YYYY`) into standard SQL date structures.
-* **Cross-System Text Standardization:** Mapped disparate legacy location codes (`North_Branch_A`) to modern standardized naming conventions (`Site A - North`).
-* **Missing Value & Null Management:** Handled unrecorded tracking notes and missing visit markers using conditional fallback logic (`COALESCE`).
+A robust end-to-end SQL data pipeline and analytics portfolio project built in **SQLite**. This project demonstrates multi-source clinical data harmonization, schema standardization, patient ID reconciliation, and automated safety signal tracking for clinical trial management.
 
 ---
 
-### 📊 Key Performance Indicators (KPIs Tracked)
-1. **Retention & Success Rate:** Percentage of patients successfully completing study milestones across sites.
-2. **Data Query Load:** Total data entry discrepancies flagged per clinic, highlighting where staff data entry training is required.
-3. **Multi-Source Reconciliation:** Tracking patient distribution across modern and legacy database versions.
+## 🛠️ Tech Stack & Skills Demonstrated
+
+* **Database & Querying:** SQL (SQLite / DB Browser)
+* **Advanced SQL Techniques:** Common Table Expressions (CTEs), `UNION ALL`, `LEFT JOIN` aggregations, Case-insensitive String Normalization (`UPPER(TRIM())`), Conditional Aggregation (`SUM(CASE WHEN...)`), Date Parsing (`SUBSTR`), and Multi-column Sorting (`ORDER BY`).
+* **Data Engineering & Quality Control:** Schema standardization, legacy system integration, missing value handling (`COALESCE`), and audit query design.
+* **Reporting & Visualization:** Excel Executive Dashboards, KPI Scorecards, and Granular Patient Audit Logs.
 
 ---
 
-### 📁 Repository Structure
-* `/patients_raw.csv` — Current participant intake records with formatting irregularities.
-* `/clinical_visits_and_queries_raw.csv` — Current clinical visit logs and error flags.
-* `/historical_patient_archive.csv` — Unupdated legacy archive requiring format transformation.
-* `/clinical_analysis.sql` — Multi-table SQL script handling data unioning, cleaning, and master KPI aggregation.
-* 📄 [Download Daira Santos' Resume (PDF)](./Daira%20Santos%20-%20Resume.pdf)
+## 📁 Repository Structure
+
+```text
+clinical-trial-patient-retention/
+│
+├── README.md                                # Executive overview & technical documentation
+├── Daira Santos - Resume.pdf                # Candidate resume & qualifications
+│
+├── data/                                    # Raw & standardized source datasets
+│   ├── patients_raw.csv                     # Active system patient registry
+│   ├── historical_patient_archive.csv        # Legacy archive records
+│   ├── clinical_visits_and_queries_raw.csv  # Visit tracking & data query logs
+│   └── patient_safety_events.csv            # Adverse event tracking logs
+│
+├── sql/                                     # Core SQL pipeline scripts
+│   └── clinical_analysis.sql                # Full SQL script (ETL, master & audit queries)
+│
+└── reports/                                 # Business intelligence outputs
+    ├── clinical_trial_executive_dashboard.xlsx # Formatted multi-tab executive workbook
+    └── _clinical_kpi_report.csv             # Exported site-level aggregate KPIs
