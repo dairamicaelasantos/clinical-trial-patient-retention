@@ -1,1 +1,6 @@
-
+event_id,patient_id,ae_severity,action_taken
+E01,P-1001,Mild,None
+E02,P-1001,Severe,Drug Interrupted
+E03,P-1003,Severe,Dose Reduced
+E04,P-1003,Moderate,None
+E05,OLD-802,Severe,Discontinued
