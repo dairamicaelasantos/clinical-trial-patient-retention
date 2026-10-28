@@ -13,6 +13,21 @@ A robust end-to-end SQL data pipeline and analytics portfolio project built in *
 
 ---
 
+### **Site C - East Has High Data Cleaning Overhead:**
+Site C accumulated 9 data queries across only 2 current-system patients (an average of 4.5 queries per patient), which is significantly higher than Site A and Site B.
+
+**Recommendation for Clinical Operations:** Clinical Research Associates (CRAs) should schedule targeted site retraining on electronic data capture (EDC) entry guidelines for Site C personnel to reduce query resolution turnaround time.
+
+### **Site A - North Requires Safety Audit Oversight:**
+Site A reported 2 severe adverse events, while maintaining a 66% visit completion rate on current system records.
+
+**Recommendation for Safety Monitoring:** The medical monitor should perform an immediate risk-based audit on Site A's protocol compliance and patient safety logs.
+
+### **Legacy Archive Reconciliation Value:**
+Successfully bridging historical archives (historical_patient_archive.csv) with active patient registries (patients_raw.csv) uncovered 4 legacy records, including a severe event caught in historical logs at Site B. This proves Master Patient Index (MPI) deduplication logic successfully prevented lost historical safety data during database migrations.
+
+---
+
 ## 📁 Repository Structure
 
 ```text
